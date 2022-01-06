@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Data</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style type="text/css">
+    	li{
+    		color: white;
+    	}
+    </style>
+  </head>
+  <body>
+    <h2>Uncracked Hashes</h2>
+    <div class="scroll">
+      <table>
+         <tr>
+            <th>Organisation</th>
+            <th>ID</th>
+            <th>NT</th>
+            <th>LM</th>
+         </tr>
+
+         <% for (var i = 0; i < array2.length; i++) { %>
+          <tr>
+            <td value="<%=array2[i][0]%>" ><%= array2[i][0] %></td>
+            <td><%= array2[i][1] %></td>
+            <td><%= array2[i][2] %></td>
+            <td><%= array2[i][3] %></td>
+          </tr>    
+         <% } %>
+      </table>
+    </div>
+    <table>
+      <h2>Cracked Hashes</h2>
+       <tr>
+          <th>Uncracked</th>
+          <th>Cracked</th>
+       </tr>
+
+       <% for (var i = 0; i < array1.length; i++) { %>
+        <tr>
+          <td value="<%=array1[i][0]%>" ><%= array1[i][0] %></td>
+          <td><%= array1[i][1] %></td>
+        </tr>    
+       <% } %>
+    </table>
+
+    <form ref='uploadForm' id='uploadForm' action='/format' method='post' encType="multipart/form-data">
+
+      <select class="selectpicker" name="selectpicker">
+        <optgroup label="Select Table">
+          <% for (var i = 0; i < org.length; i++) { %>
+          <option value="<%= org[i] %>"><%= org[i] %></option>
+<!--           <option name="option1" value="HQCAA.NET">HQCAA.NET</option>
+          <option name="option2" value="IST.edu.pk">IST.edu.pk</option> -->
+          <% } %>
+        </optgroup>
+    </select>
+
+      <button>Get Data!</button>
+    </form> 
+
+
+    <table>
+      <h2>Get the common Data!</h2>
+       <tr>
+          <th>Organisation</th>
+          <th>ID</th>
+          <th>NT</th>
+          <th>LM</th>
+       </tr>
+   <% for (var i = 0; i < f_array.length; i++) { %>
+    <tr class="<%=f_class[i]%>">
+      <td  value="<%=f_array[i][0]%>" ><%= f_array[i][0] %></td>
+      <td><%= f_array[i][1] %></td>
+      <td><%= f_array[i][2] %></td>
+      <td><%= f_array[i][3] %></td>
+    </tr>    
+   <% } %>
+    </table>
+
+  </body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Data</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style type="text/css">
+    	li{
+    		color: white;
+    	}
+    </style>
+  </head>
+  <body>
+<table>
+   <tr>
+      <th>Organisation</th>
+      <th>ID</th>
+      <th>NT</th>
+      <th>LM</th>
+   </tr>
+
+   <% for (var i = 0; i < array.length; i++) { %>
+    <tr>
+      <td name="<%=array[i][0]%>" ><%= array[i][0] %></td>
+      <td><%= array[i][1] %></td>
+      <td><%= array[i][2] %></td>
+      <td><%= array[i][3] %></td>
+    </tr>    
+   <% } %>
+
+
+
+
+</table>
+
+
+
+
+	</body>
+</html>

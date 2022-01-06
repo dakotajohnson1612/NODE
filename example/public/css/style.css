@@ -1,0 +1,26 @@
+body{
+	background: black;
+	color:  white;
+}
+th, td {
+  padding: 20px;
+  border: 1px solid white;
+}
+table{
+	display: inline-block;
+	margin: 20px;
+	border: 1px solid white;
+	overflow-y: scroll; 
+	height:400px;
+}
+/*.scroll{
+	overflow-y: scroll; 
+	height:400px;
+	border : 2px solid white;
+}*/
+.table-row{
+	display: table-row;
+}
+.none{
+	display: none;
+}

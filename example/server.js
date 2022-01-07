@@ -30,6 +30,12 @@ function toArray(uploadPath) {
    var array = fs.readFileSync(orgPath).toString().split("\r\n");
    return array;
  }
+ function remove(org) {
+    var filtered = org.filter(function(value, index, arr){ 
+        return value!=="";
+    });
+    return filtered;
+ }
 
 //***************Search for Cracked***************//
 
@@ -93,6 +99,12 @@ function getNames(f_array) {
       return names;
       // console.log(names);
  }
+
+//*************** Get on "/" ***************//
+app.get('/', (req, res) => {
+    res.render('info')
+});
+
 
 //***************To upload file***************//
 app.get('/cform', (req, res) => {
@@ -216,7 +228,8 @@ app.get('/format', (req, res) => {
   var f_class = [];
   let orgPath = __dirname + '/organisations.txt';
   var org = getOrg(orgPath);
-  console.log(org);
+  org = remove(org);
+  console.log("Format",org);
   res.render('format', {array1:split_array1, array2:split_array2,f_array:f_array,f_class:f_class,org:org});
 });
 
@@ -262,21 +275,48 @@ app.post('/format', (req, res) => {
     // console.log(f_class);
     let orgPath = __dirname + '/organisations.txt';
     var org = getOrg(orgPath);
+    org = remove(org);
   res.render('format', {array1:split_array1, array2:split_array2,f_array:f_array,f_class:f_class,org:org});
 });
 
-//***************Add data***************//
+//***************Add Organisations***************//
 
 app.get('/add', (req, res) => {
   res.render('add');
 });
 
 app.post('/add', (req, res) => {
-  console.log(req.body.oname);
-  let o = "\r\n" + req.body.oname
+  let o = "\r\n" + req.body.oname;
   res.send('Added!');
   let orgPath = __dirname + '/organisations.txt';
       fs.appendFileSync(orgPath,o);
+});
+
+//***************Delete Organisations***************//
+
+app.get('/delete', (req, res) => {
+  res.render('delete');
+});
+
+app.post('/delete', (req, res) => {
+  let o = req.body.oname;
+  let orgPath = __dirname + '/organisations.txt';
+  var org = getOrg(orgPath);
+  console.log(org);
+  fs.writeFileSync(orgPath, '', function(){console.log('Emptied!')});
+
+  const index = org.indexOf(o);
+  if (index > -1) {
+    org.splice(index, 1);
+  }
+  console.log(org);
+  console.log(org.length);
+  for (i in org){
+      fs.appendFileSync(orgPath, org[i]);
+      fs.appendFileSync(orgPath, "\r\n");
+    }
+
+  res.send("Deleted!");
 });
 
 //***************Server Listening***************//
